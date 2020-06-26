@@ -14,7 +14,7 @@ app.use(express.static(publicPath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/login', async (req,res) => {
+app.post('/api/login', async (req,res) => {
     let {email, password, dob} = req.body
     dob = dob.replace(/-/g, '')
     const result = await authenticate(email,password,dob);
@@ -22,7 +22,7 @@ app.post('/login', async (req,res) => {
     res.send(result);
 })
 
-app.get('/margin', async(req,res) => {
+app.get('/api/margin', async(req,res) => {
     const cookie = '5paisacookie=bkljta2e1j2pn4sntkpk1ewm';
     const clientID = '55155874';
 
@@ -30,7 +30,7 @@ app.get('/margin', async(req,res) => {
     res.send(response);
 })
 
-app.get('/holdings', async(req,res) => {
+app.get('/api/holdings', async(req,res) => {
     const cookie = '5paisacookie=bkljta2e1j2pn4sntkpk1ewm';
     const clientID = '55155874';
 
@@ -38,7 +38,7 @@ app.get('/holdings', async(req,res) => {
     res.send(response)
 })
 
-app.get('/positions', async(req,res) => {
+app.get('/api/positions', async(req,res) => {
     const cookie = '5paisacookie=bkljta2e1j2pn4sntkpk1ewm';
     const clientID = '55155874';
 
@@ -46,7 +46,7 @@ app.get('/positions', async(req,res) => {
     res.send(response)
 })
 
-app.get('/orderBook', async(req,res) => {
+app.get('/api/orderBook', async(req,res) => {
     const cookie = '5paisacookie=bkljta2e1j2pn4sntkpk1ewm';
     const clientID = '55155874';
 

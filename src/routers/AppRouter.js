@@ -20,7 +20,7 @@ class AppRouter extends React.Component {
 	submitLoginData(email, dob, password) {
 		const data = {email, dob, password}
 
-		axios.post('/login', data).then(res => {
+		axios.post('/api/login', data).then(res => {
 			console.log(res.data)
 			if(!res.data.error) this.intialiseUserData(res.data)
 			else alert('Invalid Credentials');
