@@ -3,6 +3,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const authenticate = require('../utils/api/login')
 const userMargin = require('../utils/api/margin')
+const userHoldings = require('../utils/api/holdings')
+const userPositions = require('../utils/api/positions')
+const userOrderBook = require('../utils/api/orderBook')
 
 const app = express();
 const publicPath = path.join(__dirname,'..','public')
@@ -31,7 +34,24 @@ app.get('/holdings', async(req,res) => {
     const cookie = '5paisacookie=bkljta2e1j2pn4sntkpk1ewm';
     const clientID = '55155874';
 
-    res.send('something')
+    const response = await userHoldings(cookie,clientID);
+    res.send(response)
+})
+
+app.get('/positions', async(req,res) => {
+    const cookie = '5paisacookie=bkljta2e1j2pn4sntkpk1ewm';
+    const clientID = '55155874';
+
+    const response = await userPositions(cookie,clientID);
+    res.send(response)
+})
+
+app.get('/orderBook', async(req,res) => {
+    const cookie = '5paisacookie=bkljta2e1j2pn4sntkpk1ewm';
+    const clientID = '55155874';
+
+    const response = await userOrderBook(cookie,clientID);
+    res.send(response)
 })
 
 app.listen(8000, () => {

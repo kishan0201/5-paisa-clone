@@ -12,7 +12,7 @@ module.exports = async (cookies, clientID) => {
         appVer: config.appVersion,
         key: config.key,
         osName: config.orderChannel,
-        requestCode: config.api.userHoldings.requestCode,
+        requestCode: config.api.userOrderBook.requestCode,
         userId: config.userId,
         password: config.password
     }
@@ -26,7 +26,7 @@ module.exports = async (cookies, clientID) => {
   try {
     response = await axios({
       method: 'post',
-      url: config.api.userHoldings.url,
+      url: config.api.userOrderBook.url,
       headers,
       data: {
         head: requestHead,
@@ -38,5 +38,5 @@ module.exports = async (cookies, clientID) => {
     console.log('ERROR')
     console.log(error)
   }
-  return response.data.body.Data;
+  return response.data.body;
 }

@@ -10,8 +10,7 @@ module.exports = {
         },
         userLogin: {
             requestCode: '5PLoginV2',
-            url:
-            'https://Openapi.5paisa.com/VendorsAPI/Service1.svc/V2/LoginRequestMobileNewbyEmail'
+            url: 'https://Openapi.5paisa.com/VendorsAPI/Service1.svc/V2/LoginRequestMobileNewbyEmail'
         },
         userMargin: {
             requestCode: '5PMarginV3',
@@ -23,8 +22,11 @@ module.exports = {
         },
         userPositions: {
             requestCode: '5PNPNWV1',
-            url:
-            'https://Openapi.5paisa.com/VendorsAPI/Service1.svc/V1/NetPositionNetWise'
+            url: 'https://Openapi.5paisa.com/VendorsAPI/Service1.svc/V1/NetPositionNetWise'
+        },
+        userHoldings: {
+            requestCode: '5PHoldingV2',
+            url: 'https://Openapi.5paisa.com/VendorsAPI/Service1.svc/V2/Holding'
         }
     },
 
