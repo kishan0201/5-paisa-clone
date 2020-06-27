@@ -2,12 +2,16 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import axios from 'axios'
 import LoginForm from '../components/LoginForm'
-import Dashboard from '../components/Dashboard'
+import DashBoard from '../components/DashBoard'
+import OrderBook from '../components/OrderBook'
+import Test from '../components/Test'
+import DashboardRouter from '../components/DashboardRouter'
 
 class AppRouter extends React.Component {
 	constructor(props){
 		super(props)
 		this.submitLoginData = this.submitLoginData.bind(this);
+		this.handleUserLogout = this.handleUserLogout.bind(this);
 		this.state = {
 			name: undefined,
 			email: undefined,
@@ -22,21 +26,25 @@ class AppRouter extends React.Component {
 
 		axios.post('/api/login', data).then(res => {
 			console.log(res.data)
-			if(!res.data.error) this.intialiseUserData(res.data)
+			if(!res.data.error) {
+				this.intialiseUserData(res.data)
+			}
 			else alert('Invalid Credentials');
 		})
 	}
 
 	intialiseUserData(userData) {
 		console.log(userData.clientID)
-		this.setState(() => {
-			return {
-				name: userData.name,
-				email: userData.email,
-				clientID: userData.clientID,
-				cookies: userData.cookies,
-				isLogged: true
-			}
+		localStorage.setItem('isLogged','Y')
+		this.setState({
+			isLogged: true
+		})
+	}
+
+	handleUserLogout(){
+		localStorage.setItem('isLogged','N')
+		this.setState({
+			isLogged: false
 		})
 	}
 
@@ -44,7 +52,10 @@ class AppRouter extends React.Component {
 	return (
 	<BrowserRouter>
 		<div>
-			{this.state.isLogged ? <Dashboard data={this.state}/> : <LoginForm submitLoginData={this.submitLoginData}/>}
+			{localStorage.getItem('isLogged') === 'Y' ? 
+				<DashboardRouter logout={this.handleUserLogout}/> : 
+				<LoginForm submitLoginData={this.submitLoginData}/>
+			}
 		</div>
 	</BrowserRouter>
 )} 
