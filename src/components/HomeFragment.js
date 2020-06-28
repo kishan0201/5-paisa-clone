@@ -95,7 +95,7 @@ export default function HomeFragment(props) {
             <Route path= "/funds" component= {Funds} />
             <Route path= "/profile" component= {Profile} />
             <Route path= "/orderstatus" component= {OrderStatus} />
-            <Route path= "/logout" component= {Logout} logout={props.logout}/>
+            <Route path= "/logout" component= {Logout}/>
           </Switch>
         </Router>
       </TabPanel>
