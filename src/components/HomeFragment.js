@@ -14,6 +14,7 @@ import Holdings from './Holdings';
 import Position from './Positions';
 import Funds from './Funds';
 import Profile from './Profile';
+import Logout from './Logout';
 import LoginForm from './LoginForm';
 
 
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HomeFragment() {
+export default function HomeFragment(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -94,7 +95,7 @@ export default function HomeFragment() {
             <Route path= "/funds" component= {Funds} />
             <Route path= "/profile" component= {Profile} />
             <Route path= "/orderstatus" component= {OrderStatus} />
-            <Route path= "/logout" component= {LoginForm}/>
+            <Route path= "/logout" component= {Logout} logout={props.logout}/>
           </Switch>
         </Router>
       </TabPanel>

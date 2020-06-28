@@ -22,19 +22,13 @@ app.post('/api/login', async (req,res) => {
     res.send(result);
 })
 
-app.get('/api/margin', async(req,res) => {
-    const cookie = '5paisacookie=bkljta2e1j2pn4sntkpk1ewm';
-    const clientID = '55155874';
-
-    const response = await userMargin(cookie,clientID);
+app.post('/api/margin', async(req,res) => {
+    const response = await userMargin(req.body.cookie,req.body.clientID);
     res.send(response);
 })
 
-app.get('/api/holdings', async(req,res) => {
-    const cookie = '5paisacookie=bkljta2e1j2pn4sntkpk1ewm';
-    const clientID = '55155874';
-
-    const response = await userHoldings(cookie,clientID);
+app.post('/api/holdings', async(req,res) => {
+    const response = await userHoldings(req.body.cookie,req.body.clientID);
     res.send(response)
 })
 

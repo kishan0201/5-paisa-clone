@@ -38,5 +38,5 @@ module.exports = async (cookies, clientID) => {
     console.log('ERROR')
     console.log(error)
   }
-  return response.data.body.EquityMargin[0];
+  return response.data.body.EquityMargin;
 }

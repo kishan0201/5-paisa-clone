@@ -1,11 +1,8 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import axios from 'axios'
 import LoginForm from '../components/LoginForm'
 import DashBoard from '../components/DashBoard'
-import OrderBook from '../components/OrderBook'
-import Test from '../components/Test'
-import DashboardRouter from '../components/DashboardRouter'
 
 class AppRouter extends React.Component {
 	constructor(props){
@@ -13,10 +10,6 @@ class AppRouter extends React.Component {
 		this.submitLoginData = this.submitLoginData.bind(this);
 		this.handleUserLogout = this.handleUserLogout.bind(this);
 		this.state = {
-			name: undefined,
-			email: undefined,
-			clientID: undefined,
-			cookies: undefined,
 			isLogged: false
 		}
 	}
@@ -36,28 +29,49 @@ class AppRouter extends React.Component {
 	intialiseUserData(userData) {
 		console.log(userData.clientID)
 		localStorage.setItem('isLogged','Y')
+		localStorage.setItem('cookie',userData.cookies)
+		localStorage.setItem('clientID',userData.clientID)
+		localStorage.setItem('email',userData.email)
+		localStorage.setItem('name',userData.name)
+		
 		this.setState({
 			isLogged: true
 		})
 	}
 
+	componentDidMount() {
+		if(this.props.logout) alert('logged out');
+	}
+	
 	handleUserLogout(){
-		localStorage.setItem('isLogged','N')
-		this.setState({
-			isLogged: false
-		})
+		// localStorage.setItem('isLogged','N')
+		// this.setState({
+		// 	isLogged: false
+		// })
+		alert('logged out')
 	}
 
 	render() {
 	return (
-	<BrowserRouter>
+	<Router>
 		<div>
 			{localStorage.getItem('isLogged') === 'Y' ? 
-				<DashboardRouter logout={this.handleUserLogout}/> : 
-				<LoginForm submitLoginData={this.submitLoginData}/>
+				<div className="App">
+					<Router>
+						<Route path= "/" exact component= {DashBoard} />
+						<Route path= "/orders" component= {DashBoard}/>
+						<Route path= "/holdings" component={DashBoard} />
+						<Route path= "/positions" component={DashBoard} />
+						<Route path= "/funds" component= {DashBoard} />
+						<Route path= "/profile" component= {DashBoard} />
+						<Route path= "/orderstatus" component= {DashBoard} />
+						<Route path= "/logout" component= {DashBoard} logout={this.props.logout}/>
+					</Router>
+			  	</div> : 
+					<LoginForm submitLoginData={this.submitLoginData}/>
 			}
 		</div>
-	</BrowserRouter>
+	</Router>
 )} 
 }
 
